@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /_dev_
+Disallow: /images
+Disallow: /CNAME
+Disallow: /LICENSE
+Disallow: /.git
+Disallow: /.gitignore

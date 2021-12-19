@@ -1,0 +1,14 @@
+{
+	"plugins": [ "codeblock-filename" ],
+	"plugins": [ "theme-comscore" ],
+	"author" : "OneBit安全团队",
+	"description" : "知识无罪,我们从不剥夺他人获取知识的权利",
+	"language" : "zh-hans",
+	"links" : {
+		"sidebar" : {
+			"关于BitWiki" : "https://onebitsec.github.io/about",
+			"OneBit安全团队" : "https://onebitsec.github.io/",
+			"GitHub" : "https://github.com/OneBitSec/onebitsec.github.io"
+		}
+	}
+}

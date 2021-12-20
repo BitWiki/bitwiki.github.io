@@ -2,6 +2,7 @@
   "dependencies": {
     "g": "^2.0.1",
     "gh-pages": "^3.2.3",
-    "gitbook-plugin-codeblock-filename": "^0.0.9"
+    "gitbook-plugin-codeblock-filename": "^0.0.9",
+    "gitbook-plugin-summary": "^1.1.0"
   }
 }

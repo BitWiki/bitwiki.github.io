@@ -4,8 +4,8 @@
         <description><![CDATA[A permanently free and open source knowledge base for cyber security | 一个永久免费 、开源的网络安全知识库]]></description>
         <link>https://wiki.1bit.win/</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Mon, 20 Dec 2021 17:57:37 GMT</lastBuildDate>
-        <atom:link href="https://wiki.1bit.win/rss" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Mon, 20 Dec 2021 18:28:58 GMT</lastBuildDate>
+        <atom:link href="https://wiki.1bit.win/doc/rss" rel="self" type="application/rss+xml"/>
         <author><![CDATA[BitWiki支持团队]]></author>
         <managingEditor><![CDATA[team@onebit.tk]]></managingEditor>
         <webMaster><![CDATA[team@onebit.tk]]></webMaster>
@@ -15,6 +15,12 @@
             <description><![CDATA[A permanently free and open source knowledge base for cyber security  |  一个永久免费 、开源的网络安全知识库]]></description>
             <link>https://wiki.1bit.win/</link>
             <guid isPermaLink="true">https://wiki.1bit.win/</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[No title]]></title>
+            <link>https://wiki.1bit.win/杂七杂八/提交模板/README.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/杂七杂八/提交模板/README.html</guid>
             <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
         </item>
         <item>
@@ -34,8 +40,8 @@
         <item>
             <title><![CDATA[CVE-2020-27986 | SonarQube <= 8.4.2.36762 存在弱口令、API未授权]]></title>
             <description><![CDATA[在SonarQube <= 8.4.2.36762 版本中，平台默认配置将可造成敏感信息泄露的API接口对外公开，并且未进行身份认证。且平台默认密码为弱口令，造成托管代码泄露。]]></description>
-            <link>https://wiki.1bit.win/漏洞文库/SonarQube/CVE-2020-27986.html</link>
-            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/SonarQube/CVE-2020-27986.html</guid>
+            <link>https://wiki.1bit.win/漏洞文库/SonarQube/CVE-2020-27986 SonarQube 8.4.2.x 存在API未授权访问漏洞.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/SonarQube/CVE-2020-27986 SonarQube 8.4.2.x 存在API未授权访问漏洞.html</guid>
             <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
         </item>
     </channel>

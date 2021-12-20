@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[BitWiki]]></title>
+        <description><![CDATA[A permanently free and open source knowledge base for cyber security | 一个永久免费 、开源的网络安全知识库]]></description>
+        <link>https://wiki.1bit.win/</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Mon, 20 Dec 2021 17:57:37 GMT</lastBuildDate>
+        <atom:link href="https://wiki.1bit.win/rss" rel="self" type="application/rss+xml"/>
+        <author><![CDATA[BitWiki支持团队]]></author>
+        <managingEditor><![CDATA[team@onebit.tk]]></managingEditor>
+        <webMaster><![CDATA[team@onebit.tk]]></webMaster>
+        <category><![CDATA[gitbook]]></category>
+        <item>
+            <title><![CDATA[No title]]></title>
+            <description><![CDATA[A permanently free and open source knowledge base for cyber security  |  一个永久免费 、开源的网络安全知识库]]></description>
+            <link>https://wiki.1bit.win/</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[CVE-xxx-xxx-xxx | xx >= 2.5.2 存在xxx漏洞]]></title>
+            <description><![CDATA[在Apache HTTP Server x.x.x.x 中对路径规范化所做的更改中发现了一个缺陷。攻击者可以使用路径遍历攻击穿越到服务器目录以外。在开启CGI配置后，将会从目录穿越 / 信息泄露升级为RCE。]]></description>
+            <link>https://wiki.1bit.win/杂七杂八/提交模板/漏洞文库模板.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/杂七杂八/提交模板/漏洞文库模板.html</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[No title]]></title>
+            <description><![CDATA[SonarQube（原Sonar）[3]是SonarSource开发的一个开源平台，用于持续检查代码质量，通过静态分析代码执行自动审查，以检测20 多种编程语言上的错误、代码异味和安全漏洞。SonarQube 提供关于重复代码、编码标准、单元测试、代码覆盖率、代码复杂性、注释、错误的报告。, 和安全漏洞。]]></description>
+            <link>https://wiki.1bit.win/漏洞文库/SonarQube/README.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/SonarQube/README.html</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[CVE-2020-27986 | SonarQube <= 8.4.2.36762 存在弱口令、API未授权]]></title>
+            <description><![CDATA[在SonarQube <= 8.4.2.36762 版本中，平台默认配置将可造成敏感信息泄露的API接口对外公开，并且未进行身份认证。且平台默认密码为弱口令，造成托管代码泄露。]]></description>
+            <link>https://wiki.1bit.win/漏洞文库/SonarQube/CVE-2020-27986.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/SonarQube/CVE-2020-27986.html</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+    </channel>
+</rss>

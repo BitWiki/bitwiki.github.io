@@ -1,30 +1,57 @@
 {
-    "plugins": ["codeblock-filename"],
-    "plugins": ["summary"],
-    "plugins": ["expandable-chapters-small"],
-    "plugins": ["copy-code-button"],
-    "plugins": ["-sharing","sharing-plus"],
-    "plugins": ["-lunr","-search","search-plus-mod"],
-	"plugins": ["splitter"],
-    "author": "BitWiki支持团队",
-    "description": "A permanently free and open source knowledge base for cyber security | 一个永久免费 、开源的网络安全知识库",
-    "language": "zh-hans",
-    "links": {
-      "sidebar": {
-        "OneBit安全团队": "https://onebitsec.github.io/",
-        "GitHub": "https://github.com/BitWiki/bitwiki.github.io"
-      },
-      "plugins": ["github-buttons"],
-      "pluginsConfig": {
-        "github-buttons": {
-          "repo": "Bitwiki/bitwiki.github.io",
-          "types": [
-            "star",
-            "watch",
-            "fork"
-          ],
-          "size": "small"
-        }
-      }
+  "author": "BitWiki支持团队",
+  "description": "A permanently free and open source knowledge base for cyber security | 一个永久免费 、开源的网络安全知识库",
+  "language": "zh-hans",
+  "links": {
+    "sidebar": {
+      "OneBit安全团队": "https://onebitsec.github.io/",
+      "GitHub": "https://github.com/BitWiki/bitwiki.github.io"
     }
+  },
+  "plugins": [
+    "codeblock-filename",
+    "summary",
+    "chapter-fold",
+    "copy-code-button",
+    "-sharing",
+    "-lunr",
+    "search-pro",
+    "splitter",
+    "github-buttons",
+    "insert-logo",
+    "custom-favicon",
+    "popup",
+	"back-to-top-button",
+	"advanced-emoji",
+    "theme-comscore",
+    "rss"
+  ],
+  "pluginsConfig": {
+    "github-buttons": {
+      "repo": "Bitwiki/bitwiki.github.io",
+      "types": [
+        "star",
+        "watch",
+        "fork"
+      ],
+      "size": "small"
+    },
+    "favicon": "../image/favicon.ico",
+    "insert-logo": {
+      "url": "https://wiki.1bit.win/images/BitWiki.png",
+      "style": "background: none; max-height: 30px; min-height: 30px"
+    },
+    "rss": {
+      "title": "BitWiki",
+      "description": "A permanently free and open source knowledge base for cyber security | 一个永久免费 、开源的网络安全知识库",
+      "author": "BitWiki支持团队",
+      "feed_url": "https://wiki.1bit.win/rss",
+      "site_url": "https://wiki.1bit.win/",
+      "managingEditor": "team@onebit.tk",
+      "webMaster": "team@onebit.tk",
+      "categories": [
+        "gitbook"
+      ]
+    }
+  }
 }

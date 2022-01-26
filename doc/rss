@@ -4,7 +4,7 @@
         <description><![CDATA[A permanently free and open source knowledge base for cyber security | 一个永久免费 、开源的网络安全知识库]]></description>
         <link>https://wiki.1bit.win/</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Mon, 20 Dec 2021 18:28:58 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 26 Jan 2022 17:38:41 GMT</lastBuildDate>
         <atom:link href="https://wiki.1bit.win/doc/rss" rel="self" type="application/rss+xml"/>
         <author><![CDATA[BitWiki支持团队]]></author>
         <managingEditor><![CDATA[team@onebit.tk]]></managingEditor>
@@ -15,6 +15,19 @@
             <description><![CDATA[A permanently free and open source knowledge base for cyber security  |  一个永久免费 、开源的网络安全知识库]]></description>
             <link>https://wiki.1bit.win/</link>
             <guid isPermaLink="true">https://wiki.1bit.win/</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[No title]]></title>
+            <link>https://wiki.1bit.win/杂七杂八/工具推荐/README.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/杂七杂八/工具推荐/README.html</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[No title]]></title>
+            <description><![CDATA[CertEagle - 使用实时 CT 日志提要的资产监控实用程序]]></description>
+            <link>https://wiki.1bit.win/杂七杂八/工具推荐/信息收集.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/杂七杂八/工具推荐/信息收集.html</guid>
             <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
         </item>
         <item>
@@ -32,6 +45,27 @@
         </item>
         <item>
             <title><![CDATA[No title]]></title>
+            <description><![CDATA[Apache软件基金会，是专门为支持开源软件项目而办的一个非营利性组织。在它所支持的Apache项目与子项目中，所发行的软件产品都遵循Apache许可证。]]></description>
+            <link>https://wiki.1bit.win/漏洞文库/Apache/README.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/Apache/README.html</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[No title]]></title>
+            <description><![CDATA[Apache Log4j 2是Log4j的升级版，与它的前身Log4j 1.x相比有了很大的改进，并提供了Logback中的许多改进，同时修复了Logback架构中的一些固有问题。]]></description>
+            <link>https://wiki.1bit.win/漏洞文库/Apache/Log4j2/README.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/Apache/Log4j2/README.html</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[CVE-2021-44428 | log4j2 >= 2.14.x 存在JNDI RCE漏洞]]></title>
+            <description><![CDATA[Apache Log4j2 版本 2.14.x 及以下版本存在远程代码执行漏洞。攻击者可在任何可记录在日志消息的参数中进行 JNDI 注入。当启用消息查找替换时，攻击者可以控制日志消息或日志消息的参数并执行从 LDAP 服务器加载的任意代码。]]></description>
+            <link>https://wiki.1bit.win/漏洞文库/Apache/Log4j2/CVE-2021-44428  log4j2  2.14.x 存在JNDI RCE漏洞.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/Apache/Log4j2/CVE-2021-44428  log4j2  2.14.x 存在JNDI RCE漏洞.html</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[No title]]></title>
             <description><![CDATA[SonarQube（原Sonar）[3]是SonarSource开发的一个开源平台，用于持续检查代码质量，通过静态分析代码执行自动审查，以检测20 多种编程语言上的错误、代码异味和安全漏洞。SonarQube 提供关于重复代码、编码标准、单元测试、代码覆盖率、代码复杂性、注释、错误的报告。, 和安全漏洞。]]></description>
             <link>https://wiki.1bit.win/漏洞文库/SonarQube/README.html</link>
             <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/SonarQube/README.html</guid>
@@ -40,8 +74,8 @@
         <item>
             <title><![CDATA[CVE-2020-27986 | SonarQube <= 8.4.2.36762 存在弱口令、API未授权]]></title>
             <description><![CDATA[在SonarQube <= 8.4.2.36762 版本中，平台默认配置将可造成敏感信息泄露的API接口对外公开，并且未进行身份认证。且平台默认密码为弱口令，造成托管代码泄露。]]></description>
-            <link>https://wiki.1bit.win/漏洞文库/SonarQube/CVE-2020-27986 SonarQube 8.4.2.x 存在API未授权访问漏洞.html</link>
-            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/SonarQube/CVE-2020-27986 SonarQube 8.4.2.x 存在API未授权访问漏洞.html</guid>
+            <link>https://wiki.1bit.win/漏洞文库/SonarQube/CVE-2020-27986 SonarQube 小于 8.4.2.x 存在API未授权访问漏洞.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/SonarQube/CVE-2020-27986 SonarQube 小于 8.4.2.x 存在API未授权访问漏洞.html</guid>
             <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
         </item>
     </channel>

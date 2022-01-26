@@ -1,0 +1,1 @@
+Apache Log4j 2是Log4j的升级版，与它的前身Log4j 1.x相比有了很大的改进，并提供了Logback中的许多改进，同时修复了Logback架构中的一些固有问题。

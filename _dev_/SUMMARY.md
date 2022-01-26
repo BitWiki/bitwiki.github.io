@@ -1,14 +1,27 @@
 
 ## 杂七杂八
 
+- [工具推荐](杂七杂八/工具推荐/README.md)
+
+    - [信息收集](杂七杂八/工具推荐/信息收集.md)
 - [提交模板](杂七杂八/提交模板/README.md)
 
     - [漏洞文库模板](杂七杂八/提交模板/漏洞文库模板.md)
 
 ## 漏洞文库
 
+- [Apache](漏洞文库/Apache/README.md)
+
+    - [Log4j2](漏洞文库/Apache/Log4j2/README.md)
+
+        - [CVE 2021 44428  Log4j2  2.14.X 存在JNDI RCE漏洞](漏洞文库/Apache/Log4j2/CVE-2021-44428  log4j2  2.14.x 存在JNDI RCE漏洞.md)
 - [SonarQube](漏洞文库/SonarQube/README.md)
 
-    - [CVE 2020 27986 SonarQube 8.4.2.X 存在API未授权访问漏洞](漏洞文库/SonarQube/CVE-2020-27986 SonarQube 8.4.2.x 存在API未授权访问漏洞.md)
+    - [CVE 2020 27986 SonarQube 小于 8.4.2.X 存在API未授权访问漏洞](漏洞文库/SonarQube/CVE-2020-27986 SonarQube 小于 8.4.2.x 存在API未授权访问漏洞.md)
 
 ## 知识文库
+
+
+## 赏金猎人
+
+- [BugBountyTip]()

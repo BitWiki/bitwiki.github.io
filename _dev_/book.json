@@ -40,7 +40,7 @@
     },
     "favicon": "../images/favicon.ico",
     "insert-logo": {
-      "url": "https://wiki.1bit.win/images/BitWiki.png",
+      "url": "../images/BitWiki.png",
       "style": "background: none; max-height: 60px; min-height: 60px"
     },
     "rss": {

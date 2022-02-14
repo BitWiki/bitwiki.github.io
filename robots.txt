@@ -5,3 +5,4 @@ Disallow: /CNAME
 Disallow: /LICENSE
 Disallow: /.git
 Disallow: /.gitignore
+Disallow: /doc

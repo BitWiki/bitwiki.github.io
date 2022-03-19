@@ -15,6 +15,13 @@
     - [Log4j2](漏洞文库/Apache/Log4j2/README.md)
 
         - [CVE 2021 44428  Log4j2  2.14.X 存在JNDI RCE漏洞](漏洞文库/Apache/Log4j2/CVE-2021-44428  log4j2  2.14.x 存在JNDI RCE漏洞.md)
+    - [Solr](漏洞文库/Apache/Solr/README.md)
+
+        - [CVE 2017 12629  Apache Solr  7.1.0  存在XXE漏洞](漏洞文库/Apache/Solr/CVE-2017-12629  Apache Solr  7.1.0  存在XXE漏洞.md)
+        - [CVE 2017 12629  Apache Solr  7.1.0  存在远程代码执行漏洞](漏洞文库/Apache/Solr/CVE-2017-12629  Apache Solr  7.1.0  存在远程代码执行漏洞.md)
+        - [CVE 2019 12409 Apache Solr 存在RMI注入漏洞](漏洞文库/Apache/Solr/CVE-2019-12409 Apache Solr 存在RMI注入漏洞.md)
+        - [CVE 2019 17558 Apache Solr 存在远程代码执行漏洞](漏洞文库/Apache/Solr/CVE-2019-17558 Apache Solr 存在远程代码执行漏洞.md)
+        - [CVE 2021 27905 Apache Solr 存在SSRF漏洞](漏洞文库/Apache/Solr/CVE-2021-27905 Apache Solr 存在SSRF漏洞.md)
     - [TomCat](漏洞文库/Apache/TomCat/README.md)
 
         - [CVE 2017 12615 Tomcat  存在PUT请求文件上传漏洞](漏洞文库/Apache/TomCat/CVE-2017-12615 Tomcat  存在PUT请求文件上传漏洞.md)
